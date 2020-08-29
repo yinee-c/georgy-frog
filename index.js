@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const fetch = require('node-fetch');
 const champs = require('lol-champions');
 
-const prefix = "k!";
+const prefix = "g!";
 
 const config = require('./config.json');
 
@@ -74,6 +74,9 @@ client.on('message', message => {
 
     if(command === 'kum') {
         client.commands.get('kum').execute(message, args);
+    }
+    if(command === 'bohater') {
+        client.commands.get('bohater').execute(message, args);
     }
 });
 
