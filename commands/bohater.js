@@ -6,6 +6,6 @@ module.exports = {
     execute(message, args) {
         var randomNumber = Math.floor(Math.random()*champs.length);
         let randomChamp = champs[randomNumber]["name"];
-        message.channel.send(`losowy bohater dla ciebie to: ${randomChamp}`);
+        message.reply(`losowy bohater dla ciebie to: ${randomChamp}`);
     }
 }
