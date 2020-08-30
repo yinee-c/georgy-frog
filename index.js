@@ -39,8 +39,8 @@ client.once('ready', () => {
     {
         case 1:
             {
-                console.log("sets listening kda pop stars status.");
-                client.user.setActivity("K/DA POP STARS", {type:'LISTENING'});
+                console.log("sets neeko status.");
+                client.user.setActivity("Neeko", {type:'LISTENING'});
                 break;
             }
         case 2:
