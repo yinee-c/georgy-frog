@@ -78,6 +78,11 @@ client.on('message', message => {
     if(command === 'bohater') {
         client.commands.get('bohater').execute(message, args);
     }
+
+    //debug command.
+    if(command === 'test') {
+        client.commands.get('bohater').execute(messsage, args);
+    }
 });
 
 client.login(process.env.token);
