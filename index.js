@@ -3,10 +3,6 @@ const client = new Discord.Client();
 const fetch = require('node-fetch');
 const champs = require('lol-champions');
 
-function emoji(id) {
-    return client.emojis.cache.get(id).toString();
-}
-
 const prefix = "g!";
 
 const config = require('./config.json');

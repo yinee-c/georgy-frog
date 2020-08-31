@@ -2,6 +2,6 @@ module.exports = {
     name: 'test',
     description: 'testt',
     execute(message, args) {
-        message.channel.send(emoji("749754895233581089"));
+        message.channel.send("<:Ahri:749754895233581089> <- AHRI :D");
     }
 }
