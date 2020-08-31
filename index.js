@@ -81,7 +81,7 @@ client.on('message', message => {
 
     //debug command.
     if(command === 'test') {
-        client.commands.get('test').execute(messsage, args);
+        client.commands.get('test').execute(message, args);
     }
 });
 
