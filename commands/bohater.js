@@ -1,4 +1,5 @@
 const champs = require('lol-champions');
+const emotes = require("../emotes.json");
 
 module.exports = {
     name: 'bohater',
@@ -6,6 +7,7 @@ module.exports = {
     execute(message, args) {
         var randomNumber = Math.floor(Math.random()*champs.length);
         let randomChamp = champs[randomNumber]["name"];
-        message.reply(`losowy bohater dla ciebie to: ${randomChamp}`);
+        let champEmote = emotes[`${randomChamp}`];
+        message.reply(`losowy bohater dla ciebie to: ${champEmote} ${randomChamp}`);
     }
 }
