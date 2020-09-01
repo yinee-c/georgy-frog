@@ -78,6 +78,9 @@ client.on('message', message => {
     if(command === 'bohater') {
         client.commands.get('bohater').execute(message, args);
     }
+    if(command === 'rotacja') {
+        client.commands.get('rotacja').execute(message, args);
+    }
 
     //debug command.
     if(command === 'test') {
