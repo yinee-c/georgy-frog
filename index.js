@@ -20,7 +20,7 @@ for(const file of commandFiles) {
 }
 
 client.once('ready', () => {
-    console.log('Katarina jest dostępna do twojej dyspozycji!');
+    console.log('zaba dostepna jak cos xd');
 
     let champs_in_game = 'Dostępni bohaterowie: ';
     var count_champs = 0;
