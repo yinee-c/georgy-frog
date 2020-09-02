@@ -3,9 +3,7 @@ const client = new Discord.Client();
 const fetch = require('node-fetch');
 const champs = require('lol-champions');
 
-const prefix = "g!";
-
-const config = require('./config.json');
+const config = require('./jsons/config.json');
 
 const fs = require('fs');
 const { count } = require('console');
@@ -20,7 +18,7 @@ for(const file of commandFiles) {
 }
 
 client.once('ready', () => {
-    console.log('zaba dostepna jak cos xd');
+    console.log('bot ready');
 
     let champs_in_game = 'Dostępni bohaterowie: ';
     var count_champs = 0;
@@ -67,9 +65,9 @@ client.once('ready', () => {
 client.on('message', message => {
     if(message.author.bot) return;
 
-    if(!message.content.startsWith(prefix)) return;
+    if(!message.content.startsWith(config.prefix_abcdefgh)) return;
 
-    const args = message.content.slice(prefix.length).split(/ +/);
+    const args = message.content.slice(config.prefix_abcdefgh.length).split(/ +/);
     const command = args.shift().toLowerCase();
 
     if(command === 'kum') {
@@ -88,4 +86,4 @@ client.on('message', message => {
     }
 });
 
-client.login(process.env.token);
+client.login(config.token_abcdefgh);

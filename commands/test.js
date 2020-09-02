@@ -1,4 +1,4 @@
-const emotes = require("../emotes.json");
+const emotes = require("../jsons/emotes.json");
 
 module.exports = {
     name: 'test',
