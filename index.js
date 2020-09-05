@@ -7,14 +7,18 @@ const config = require('./jsons/config.json');
 
 const fs = require('fs');
 const { count } = require('console');
+const { aliases } = require('./commands/przywolywacz');
 
 client.commands = new Discord.Collection();
+client.aliases = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 
 for(const file of commandFiles) {
     const command = require(`./commands/${file}`);
     client.commands.set(command.name, command);
+
+    if(command.aliases && Array.isArray(command.aliases)) command.aliases.forEach(alias => client.aliases.set(alias, command.name));
 }
 
 client.once('ready', () => {
@@ -69,21 +73,11 @@ client.on('message', message => {
 
     const args = message.content.slice(config.prefix_abcdefgh.length).split(/ +/);
     const command = args.shift().toLowerCase();
+    let cmd = client.commands.get(command);
+    if(!cmd) cmd = client.commands.get(client.aliases.get(command));
+    if(cmd)
+        cmd.execute(message, args);
 
-    if(command === 'kum') {
-        client.commands.get('kum').execute(message, args);
-    }
-    if(command === 'bohater') {
-        client.commands.get('bohater').execute(message, args);
-    }
-    if(command === 'rotacja') {
-        client.commands.get('rotacja').execute(message, args);
-    }
-
-    //debug command.
-    if(command === 'test') {
-        client.commands.get('test').execute(message, args);
-    }
 });
 
 client.login(config.token_abcdefgh);

@@ -6,6 +6,7 @@ const discord = require("discord.js");
 module.exports = {
     name: 'bohater',
     description: 'bohater',
+    aliases: ['champ'],
     execute(message, args) {
         var randomNumber = Math.floor(Math.random()*champs.length);
         let randomChamp = champs[randomNumber]["name"];

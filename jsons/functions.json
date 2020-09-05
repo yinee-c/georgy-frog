@@ -1,0 +1,5 @@
+{
+    "przywolywacz": "summoner.getBySummonerName",
+    "rankingPrzywolywacza": "league.getLeagueEntriesForSummoner",
+    "aktualnaRotacja": "champion.getChampionInfo"
+}
