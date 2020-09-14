@@ -1,6 +1,6 @@
 {
   "Bot": {
-    "Token": "NzQ5MzgzMTE0Njk0MDY2MzQ2.X0rLaQ.VWTb7gA8CpxvHpEfww8No5KR0Q4",
+    "Token": "token here",
     "Prefix": "g!"
   },
   "Colors": {
@@ -12,7 +12,7 @@
       "version_lol": "10.18.1"
     },
     "ApiKeys": {
-      "riotGamesApiKey": "RGAPI-a523babd-7ffe-449d-8cc5-7629e3f5978a"
+      "riotGamesApiKey": "riot api here"
     },
     "przedmiotCommand": {
       "blue": 1,
