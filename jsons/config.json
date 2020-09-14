@@ -1,5 +1,71 @@
 {
-    "token_abcdefgh": "token here",
-    "riotGamesApiKey_abcdefgh": "token here",
-    "prefix_abcdefgh": "g!"
+  "Bot": {
+    "Token": "NzQ5MzgzMTE0Njk0MDY2MzQ2.X0rLaQ.VWTb7gA8CpxvHpEfww8No5KR0Q4",
+    "Prefix": "g!"
+  },
+  "Colors": {
+    "fajna zielen": "#03fc62",
+    "blad embed": "#ff3c26"
+  },
+  "League of Legends": {
+    "Versions": {
+      "version_lol": "10.18.1"
+    },
+    "ApiKeys": {
+      "riotGamesApiKey": "RGAPI-a523babd-7ffe-449d-8cc5-7629e3f5978a"
+    },
+    "przedmiotCommand": {
+      "blue": 1,
+      "red": 2,
+      "niebieski": 1,
+      "czerwony": 2
+    },
+    "czarCommand": {
+      "bariera": "SummonerBarrier",
+      "oczyszczenie": "SummonerBoost",
+      "podpalenie": "SummonerDot",
+      "wyczerpanie": "SummonerExhaust",
+      "błysk": "SummonerFlash",
+      "duch": "SummonerHaste",
+      "uzdrowienie": "SummonerHeal",
+      "czystość": "SummonerMana",
+      "do króla!": "SummonerPoroRecall",
+      "rzut poro": "SummonerPoroThrow",
+      "porażenie": "SummonerSmite",
+      "naznaczenie-urf": "SummonerSnowURFSnowball_Mark",
+      "naznaczenie": "SummonerSnowball",
+      "teleportacja": "SummonerTeleport"
+    },
+    "przywolywaczCommand": {
+      "RANKED_SOLO_5x5": "Solo/Duo",
+      "RANKED_FLEX_SR": "Flexy"
+    },
+    "regions": {
+      "RU": "ru",
+      "KR": "kr",
+      "BR1": "br1",
+      "OCE": "oc1",
+      "JP": "jp1",
+      "NA": "na1",
+      "EUNE": "eun1",
+      "EUW": "euw1",
+      "TR": "tr1",
+      "LAN": "la1",
+      "LAS": "la2"
+    },
+    "mmrSettings": {
+      "mmrApi": ".whatismymmr.com/api/v1/summoner?name=",
+      "availableRegions": {
+        "EUW": "euw",
+        "EUNE": "eune",
+        "NA": "na"
+      }
+    },
+    "ApiFuncs": {
+      "przywolywacz": "summoner.getBySummonerName",
+      "rankingPrzywolywacza": "league.getLeagueEntriesForSummoner",
+      "aktualnaRotacja": "champion.getChampionInfo",
+      "masteriaBohaterow": "championMastery.getAllChampionMasteries"
+    }
+  }
 }

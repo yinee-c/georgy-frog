@@ -1,18 +1,16 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const fetch = require('node-fetch');
-const champs = require('lol-champions');
 
 const config = require('./jsons/config.json');
-
 const fs = require('fs');
-const { count } = require('console');
-const { aliases } = require('./commands/przywolywacz');
+
+const db = require('quick.db');
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
+const handlerFiles = fs.readdirSync('./handlers/').filter(file => file.endsWith('.js'));
 
 for(const file of commandFiles) {
     const command = require(`./commands/${file}`);
@@ -21,57 +19,23 @@ for(const file of commandFiles) {
     if(command.aliases && Array.isArray(command.aliases)) command.aliases.forEach(alias => client.aliases.set(alias, command.name));
 }
 
+for(const file of handlerFiles) {
+    require(`./handlers/${file}`)(client);
+}
+
 client.once('ready', () => {
-    console.log('bot ready');
-
-    let champs_in_game = 'Dostępni bohaterowie: ';
-    var count_champs = 0;
-    for(var i = 0; i < champs.length; i++)
-    {
-        if(i != champs.length)
-            champs_in_game += `${champs[i]["name"]}, `;
-        else
-            champs_in_game += `${champs[i]["name"]}.`;
-        count_champs++;
-    }
-    console.log(champs_in_game);
-
-    let stat = Math.floor(Math.random() * 3) + 1
-    switch(stat)
-    {
-        case 1:
-            {
-                console.log("sets neeko status.");
-                client.user.setActivity("Neeko", {type:'LISTENING'});
-                break;
-            }
-        case 2:
-            {
-                console.log("sets patch status.");
-                let url = "https://ddragon.leagueoflegends.com/api/versions.json";
-                let settings = {method: "Get"};
-        
-                fetch(url, settings)
-                    .then(res => res.json())
-                    .then((json) => {
-                        client.user.setActivity(`Patch: ${json[0]}`, {type:'PLAYING'}).catch(err => {console.log(err);});
-                    });
-                break;
-            }
-        case 3:
-            {
-                console.log("sets champion status");
-                client.user.setActivity(`${count_champs} bohaterów`, {type:'PLAYING'});
-            }
-    }
+    client.user.setActivity(`Z ${client.users.cache.size} użytkownikami, na ${client.guilds.cache.size} serwerach`);
+    console.log('Grzegorz - KumKum');
 });
 
 client.on('message', message => {
     if(message.author.bot) return;
+    if(message.channel.id !== '754450647083909160') return;
+    //bot channel - 754450647083909160
+    
+    if(!message.content.startsWith(config.Bot.Prefix)) return;
 
-    if(!message.content.startsWith(config.prefix_abcdefgh)) return;
-
-    const args = message.content.slice(config.prefix_abcdefgh.length).split(/ +/);
+    const args = message.content.slice(config.Bot.Prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
     let cmd = client.commands.get(command);
     if(!cmd) cmd = client.commands.get(client.aliases.get(command));
@@ -80,4 +44,4 @@ client.on('message', message => {
 
 });
 
-client.login(config.token_abcdefgh);
+client.login(config.Bot.Token);

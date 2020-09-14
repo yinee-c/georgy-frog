@@ -1,44 +1,68 @@
 const champs = require('lol-champions');
 const emotes = require("../jsons/emotes.json");
-const colors = require("../jsons/colors.json");
+const config = require("../jsons/config.json");
 const discord = require("discord.js");
+const fetch = require('node-fetch');
+
+var cee = require('./functions/createEmbedError.js');
 
 module.exports = {
     name: 'bohater',
-    description: 'bohater',
+    description: 'Informacje danego/losowego bohatera',
     aliases: ['champ'],
+    field: 'lol',
     execute(message, args) {
-        var randomNumber = Math.floor(Math.random()*champs.length);
-        let randomChamp = champs[randomNumber]["name"];
-        let backgroundChamp = randomChamp;
-        let champEmote = emotes[`${randomChamp}`];
+        let backgroundChamp, champEmote, randomChamp, all_info, settings;
+        var randomNumber;
 
-        if(backgroundChamp === "Kai'Sa")    backgroundChamp = "Kaisa";
-        if(backgroundChamp === "Jarvan IV")    backgroundChamp = "JarvanIV";
-        if(backgroundChamp === "Kha'Zix")    backgroundChamp = "Khazix";
-        if(backgroundChamp === "Kog'Maw")    backgroundChamp = "KogMaw";
-        if(backgroundChamp === "LeBlanc")    backgroundChamp = "Leblanc";
-        if(backgroundChamp === "Kha'Zix")    backgroundChamp = "Khazix";
-        if(backgroundChamp === "Miss Fortune")    backgroundChamp = "MissFortune";
-        if(backgroundChamp === "Master Yi")    backgroundChamp = "MasterYi";
-        if(backgroundChamp === "Wukong")    backgroundChamp = "MonkeyKing";
-        if(backgroundChamp === "Nunu & Willump") backgroundChamp = "Nunu";
-        if(backgroundChamp === "Rek'Sai") backgroundChamp = "RekSai";
-        if(backgroundChamp === "Tahm Kench") backgroundChamp = "TahmKench";
-        if(backgroundChamp === "Twisted Fate") backgroundChamp = "TwistedFate";
-        if(backgroundChamp === "Vel'Koz") backgroundChamp = "Velkoz";
-        if(backgroundChamp === "Xin Zhao") backgroundChamp = "XinZhao";
-        if(backgroundChamp === "Aurelion Sol") backgroundChamp = "AurelionSol";
-        if(backgroundChamp === "Dr. Mundo") backgroundChamp = "DrMundo";
+        if(!args[0]) {
+            randomNumber = Math.floor(Math.random()*champs.length);
+            randomChamp = champs[randomNumber]["name"];
+        } else {
+            randomChamp = args[0];
+        }
 
-        let embed = new discord.MessageEmbed()
-            .setTitle("Losowy Bohater")
-            .addField("Mój żabi umysł wybrał ci tego bohatera:", `${champEmote} ${randomChamp}`)
-            .setImage(`http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${backgroundChamp}_0.jpg`)
-            .setColor(colors["fajna zielen"])
-            .setTimestamp(Date.now())
-            .setFooter(`Aktywowano przez: ${message.author.username}`, message.author.avatarURL({dynamic: true}));
-        message.channel.send(embed);
-        //message.reply(`losowy bohater dla ciebie to: ${champEmote} ${randomChamp}`);65402
+        backgroundChamp = randomChamp;
+        champEmote = emotes[`${randomChamp}`];
+        
+        all_info = `http://ddragon.leagueoflegends.com/cdn/${config["League of Legends"].Versions.version_lol}/data/pl_PL/champion.json`;
+        settings = {method: "Get"};
+
+
+        fetch(all_info, settings)
+        .then(res => res.json())
+        .then((json) => {
+            if(!args[0]) {
+                message.react(emotes.good);
+                let embed = new discord.MessageEmbed()
+                    .setTitle(`${randomChamp}`)
+                    .setThumbnail(`http://ddragon.leagueoflegends.com/cdn/${config["League of Legends"].Versions.version_lol}/img/champion/${json.data[`${randomChamp}`].image.full}`)
+                    .setImage(`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${json.data[`${randomChamp}`].id}_0.jpg`)
+                    .setDescription(`${json.data[`${randomChamp}`].title}`)
+                    .addField("Historia bohatera", `${json.data[`${randomChamp}`].blurb}  [czytaj dalej](https://universe.leagueoflegends.com/pl_PL/champion/${json.data[`${randomChamp}`].id}/).`)
+                    .setColor(config.Colors["fajna zielen"])
+                    .setTimestamp(Date.now())
+                    .setFooter(`Aktywowano przez: ${message.author.username}`, message.author.avatarURL({dynamic: true}));
+                message.channel.send(embed);
+            } else {
+                let realChampion = json.data[`${randomChamp}`];
+                if(realChampion == undefined) {
+                    cee.start(message, "Nie ma takiego bohatera!");
+                    message.react(emotes.bad_react);
+                    return;
+                }
+                message.react(emotes.good);
+                let embed = new discord.MessageEmbed()
+                    .setTitle(`${randomChamp}`)
+                    .setDescription(`${json.data[`${randomChamp}`].title}`)
+                    .setThumbnail(`http://ddragon.leagueoflegends.com/cdn/${config["League of Legends"].Versions.version_lol}/img/champion/${json.data[`${randomChamp}`].image.full}`)
+                    .addField("Historia bohatera", `${json.data[`${randomChamp}`].blurb} [czytaj dalej](https://universe.leagueoflegends.com/pl_PL/champion/${json.data[`${randomChamp}`].id}/).`)
+                    .setImage(`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${json.data[`${randomChamp}`].id}_0.jpg`)
+                    .setColor(config.Colors["fajna zielen"])
+                    .setTimestamp(Date.now())
+                    .setFooter(`Aktywowano przez: ${message.author.username}`, message.author.avatarURL({dynamic: true}));
+                message.channel.send(embed);
+            }
+    }).catch(console.log);
     }
 }

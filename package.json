@@ -1,21 +1,24 @@
 {
-  "name": "katabot",
+  "name": "grzegorz-bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Moderacyjny i Informacyjny bocik na twojego discorda.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "test"
   },
   "author": "yinee",
   "license": "ISC",
   "dependencies": {
-    "canvas": "^2.6.1",
-    "canvas-constructor": "^3.2.0",
-    "discord-rpc": "^3.1.3",
-    "discord.js": "^12.2.0",
+    "ascii-table": "0.0.9",
+    "discord.js": "^12.3.1",
+    "fs": "0.0.1-security",
     "leagueapiwrapper": "^2.0.8",
-    "lol-champions": "^10.16.1",
-    "node-fetch": "^2.6.0",
-    "teemojs": "^1.5.0"
+    "lol-champions": "^10.18.1",
+    "ms": "^2.1.2",
+    "node-fetch": "^2.6.1",
+    "opusscript": "0.0.7",
+    "quick.db": "^7.1.1",
+    "teemojs": "^1.6.0",
+    "ytdl-core": "^3.2.2"
   }
 }
