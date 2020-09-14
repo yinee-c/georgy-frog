@@ -1,6 +1,6 @@
 # georgy-frog
-po prostu bocik na discorda, mozesz sobie pobrac i edytowac itp
+bot do discorda, nazwa wzieta od zaby z lola.
 # dodatkowe
 bot nie ma idealnego kodowania, pozdrawiam
-# etc
-package-lock jest brudny
+# to-do
+poprawic komende przywolywacz.js
